@@ -1,39 +1,380 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>موقعي الشخصي</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DekoKraft | ديكور وشموع</title>
   <style>
-    body {
+    :root{
+      --bg:#fff7f6;
+      --card:#ffffff;
+      --ink:#2b2b2b;
+      --muted:#6b5f5f;
+      --accent:#c96b7c;     /* وردي دافئ */
+      --accent2:#f2c9cf;    /* وردي فاتح */
+      --line:#f0d7db;
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
       font-family: Arial, sans-serif;
-      direction: rtl;
-      text-align: center;
-      background-color: #faf7f5;
-      margin: 0;
-      padding: 40px;
+      background: radial-gradient(1200px 600px at 20% 0%, #ffe7ea 0%, var(--bg) 45%, #fff 100%);
+      color:var(--ink);
+      line-height:1.7;
     }
-    h1 {
-      color: #7a3b3b;
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1100px, 92%); margin:auto}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,247,246,.85);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
     }
-    p {
-      font-size: 18px;
-      color: #333;
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
     }
-    img {
-      max-width: 300px;
-      border-radius: 12px;
-      margin: 20px 0;
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      box-shadow: 0 8px 18px rgba(201,107,124,.25);
+      display:grid; place-items:center;
+      color:#fff; font-size:18px;
+    }
+    .brand small{display:block; color:var(--muted); font-weight:600; margin-top:2px}
+    nav ul{
+      list-style:none; padding:0; margin:0;
+      display:flex; gap:14px; flex-wrap:wrap;
+      align-items:center;
+    }
+    nav a{
+      padding:8px 10px;
+      border-radius:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    nav a:hover{background:#fff; color:var(--ink); border:1px solid var(--line)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:800;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 10px 20px rgba(0,0,0,.05);
+      cursor:pointer;
+      transition: .15s transform ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      border:none;
+      color:#fff;
+      box-shadow: 0 14px 30px rgba(201,107,124,.25);
+    }
+
+    /* Hero */
+    .hero{
+      padding:38px 0 18px;
+    }
+    .hero-wrap{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .hero-card{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    .tag{
+      display:inline-flex; gap:8px; align-items:center;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-weight:800;
+      width:fit-content;
+    }
+    h1{
+      margin:14px 0 8px;
+      font-size: clamp(26px, 3.2vw, 40px);
+      line-height:1.2;
+    }
+    .lead{color:var(--muted); margin:0 0 16px}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap}
+    .hero-img{
+      background:
+        radial-gradient(600px 300px at 30% 20%, #ffe1e7 0%, rgba(255,225,231,.0) 60%),
+        linear-gradient(135deg, #fff, #fff5f7);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 240px;
+    }
+    .hero-img .shine{
+      position:absolute; inset:-40%;
+      background: linear-gradient(45deg, rgba(255,255,255,.0) 45%, rgba(255,255,255,.6) 50%, rgba(255,255,255,.0) 55%);
+      transform: rotate(20deg);
+      animation: shine 5s infinite;
+    }
+    @keyframes shine{
+      0%{transform: translateX(-40%) rotate(20deg)}
+      50%{transform: translateX(40%) rotate(20deg)}
+      100%{transform: translateX(80%) rotate(20deg)}
+    }
+    .hero-img .text{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:18px;
+    }
+    .hero-img .text h3{margin:0; font-size:20px}
+    .hero-img .text p{margin:6px 0 0; color:var(--muted); font-weight:700}
+
+    /* Sections */
+    section{padding:18px 0}
+    .section-title{
+      display:flex; align-items:end; justify-content:space-between; gap:12px;
+      margin:0 0 12px;
+    }
+    .section-title h2{margin:0; font-size:22px}
+    .section-title span{color:var(--muted); font-weight:700}
+
+    /* Cards grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+      transition:.15s transform ease;
+    }
+    .card:hover{transform: translateY(-2px)}
+    .card .icon{
+      width:44px; height:44px; border-radius:14px;
+      background: linear-gradient(135deg, #ffe8ec, #fff);
+      border:1px solid var(--line);
+      display:grid; place-items:center;
+      font-size:20px;
+      margin-bottom:10px;
+    }
+    .card h3{margin:0 0 6px}
+    .card p{margin:0; color:var(--muted); font-weight:650}
+    .card .link{
+      display:inline-block;
+      margin-top:10px;
+      color:var(--accent);
+      font-weight:900;
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap:10px;
+    }
+    .ph{
+      height:110px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(135deg, #fff, #fff5f7);
+      box-shadow: 0 10px 18px rgba(0,0,0,.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .ph::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(200px 80px at 20% 20%, rgba(201,107,124,.22), transparent 60%);
+    }
+    .ph span{
+      position:absolute; bottom:8px; right:10px;
+      font-weight:900; color:rgba(43,43,43,.55);
+      background: rgba(255,255,255,.7);
+      border:1px solid var(--line);
+      padding:4px 8px; border-radius:999px;
+      font-size:12px;
+    }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .contact .card p{margin-top:6px}
+    .contact a.btn{width:100%}
+
+    footer{
+      padding:20px 0 40px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-wrap{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns: repeat(2, 1fr)}
+      .contact{grid-template-columns:1fr}
+      nav ul{display:none;}
     }
   </style>
 </head>
+
 <body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">DK</div>
+          <div>
+            DekoKraft
+            <small>شموع • ديكور • هدايا</small>
+          </div>
+        </div>
 
-  <h1>مرحبًا بكم في موقعي</h1>
-  <p>هذا موقع بسيط لعرض المقالات والأعمال اليدوية.</p>
+        <nav>
+          <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="candles.html">مجموعة الشموع</a></li>
+            <li><a href="contact.html">تواصل</a></li>
+          </ul>
+        </nav>
 
-  <img src="https://via.placeholder.com/300" alt="صورة تجريبية">
+        <a class="btn primary" href="candles.html">شاهد أعمالي</a>
+      </div>
+    </div>
+  </header>
 
-  <p>قريبًا: مقالات وصور ومشاريع جديدة ✨</p>
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-wrap">
+        <div class="hero-card">
+          <div class="tag">✨ ديكور تزييني handmade</div>
+          <h1>مرحبًا بك في DekoKraft</h1>
+          <p class="lead">
+            شموع تزيينية ناعمة، هدايا راقية، ولمسات ديكور دافئة… مصنوعة بحب وبأسلوب أنثوي هادئ.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="candles.html">🕯️ مجموعة الشموع</a>
+            <a class="btn" href="#gallery">🖼️ معرض الصور</a>
+            <a class="btn" href="contact.html">📩 تواصل</a>
+          </div>
+        </div>
 
+        <div class="hero-img" aria-label="صورة ترحيبية">
+          <div class="shine"></div>
+          <div class="text">
+            <h3>دفء التفاصيل</h3>
+            <p>قريبًا: مجموعات موسمية + شموع معطرة</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section>
+      <div class="section-title">
+        <h2>ماذا ستجد هنا؟</h2>
+        <span>اختاري القسم المناسب لك</span>
+      </div>
+
+      <div class="grid">
+        <a class="card" href="candles.html">
+          <div class="icon">🕯️</div>
+          <h3>مجموعة الشموع</h3>
+          <p>شموع تزيينية بأشكال وألوان ناعمة، مناسبة للهدايا والديكور.</p>
+          <span class="link">افتح المجموعة ←</span>
+        </a>
+
+        <a class="card" href="#gallery">
+          <div class="icon">🎁</div>
+          <h3>أفكار هدايا</h3>
+          <p>تغليف بسيط وأنيق + تنسيقات جميلة حسب المناسبة.</p>
+          <span class="link">شاهد الصور ←</span>
+        </a>
+
+        <a class="card" href="contact.html">
+          <div class="icon">💬</div>
+          <h3>طلبات خاصة</h3>
+          <p>إذا تريدين طلب باسم/لون معين أو كمية للمناسبات، تواصلي معي.</p>
+          <span class="link">تواصل الآن ←</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="section-title">
+        <h2>معرض الصور</h2>
+        <span>سنضع صورك هنا</span>
+      </div>
+
+      <!-- هذه مربعات مؤقتة، لاحقًا نستبدلها بصور حقيقية -->
+      <div class="gallery">
+        <div class="ph"><span>صورة 1</span></div>
+        <div class="ph"><span>صورة 2</span></div>
+        <div class="ph"><span>صورة 3</span></div>
+        <div class="ph"><span>صورة 4</span></div>
+        <div class="ph"><span>صورة 5</span></div>
+        <div class="ph"><span>صورة 6</span></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+      <div class="section-title">
+        <h2>تواصل سريع</h2>
+        <span>اختاري الطريقة</span>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <h3>واتساب</h3>
+          <p>ضع رقمك بدل 0000000000</p>
+          <a class="btn primary" href="https://wa.me/0000000000" target="_blank" rel="noopener">فتح واتساب</a>
+        </div>
+
+        <div class="card">
+          <h3>إنستغرام</h3>
+          <p>ضع رابط حسابك بدل example</p>
+          <a class="btn" href="https://instagram.com/example" target="_blank" rel="noopener">فتح إنستغرام</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      ©️ <span id="y"></span> DekoKraft — صنع بحب ✨
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
